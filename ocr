@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#Author: Linus Boyle <linusboyle@gmail.com> 
+
+TMP_IMAGE=$HOME/pix/ocr/shot.png
+
+rm -f $TMP_IMAGE
+
+spectacle -r -n -b -o "$TMP_IMAGE"
+
+if test -f "$TMP_IMAGE" ;then
+    ocr.py "$TMP_IMAGE" | xclip -selection clipboard
+    notify-send "OCR ends"
+else
+    notify-send "OCR fails"
+fi
